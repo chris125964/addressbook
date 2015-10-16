@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+   <head>
+   	<title>Comedian anlegen / ändern</title>
+   	<link rel="stylesheet" href="style.css" type="text/css" />
+   </head>
+   
+   <body>
+   	<h:form>
+   		<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+   			<f:facet name="header">Comedian anlegen / ändern</f:facet>
+   			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+			<h:outputLabel value="Vorname:" for="vorname" />
+   			<h:panelGroup>
+   				<h:inputText id="vorname" value="#{comedianHandler.aktuellerComedian.vorname}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:message for="vorname" styleClass="message" />
+   			</h:panelGroup>
+   			<h:outputLabel value="Nachname:" for="nachname" />
+   			<h:panelGroup>
+   				<h:inputText id="nachname" value="#{comedianHandler.aktuellerComedian.nachname}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:message for="nachname" styleClass="message" />
+   			</h:panelGroup>
+   			<h:outputLabel value="Geburtstag:" for="geburtstag" />
+   			<h:panelGroup>
+   				<h:inputText id="geburtstag" value="#{comedianHandler.aktuellerComedian.geburtstag}" required="true" requiredMessage="Bitte eingeben">
+   					<f:convertDateTime pattern="dd.MM.yyyy"/>
+   				</h:inputText>
+   				<h:message for="geburtstag" styleClass="message" />
+   			</h:panelGroup>
+   			
+   		</h:panelGrid>
+   		<h:commandButton id="speichern" action="#{comedianHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   	</h:form>
+   </body>
+   
+</html>

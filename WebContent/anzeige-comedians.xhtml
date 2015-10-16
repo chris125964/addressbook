@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+	<title>Anzeige Comedians</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+   
+<body>
+	<h:form>
+   		<h:dataTable value="#{comedianHandler.comedians}" var="comedian"
+   				rowClasses="odd,even" headerClass="header" footerClass="footer">
+   			<f:facet name="header">Anzeige aller Comedians</f:facet>
+   			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+   			<h:column>
+   				<f:facet name="header">Vorname</f:facet>
+   				#{comedian.vorname}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">Nachname</f:facet>
+   				#{comedian.nachname}
+   			</h:column>
+   			<h:column>
+   				<f:facet name="header">Geburtstag</f:facet>
+   				<h:outputText value="#{comedian.geburtstag}">
+   					<f:convertDateTime pattern="dd.MM.yyyy"/>
+   				</h:outputText>
+   			</h:column>
+   			<h:column>
+   				<h:commandButton action="#{comedianHandler.aendern}" value="Ändern" />
+   			</h:column>
+   			<h:column>
+   				<h:commandButton action="#{comedianHandler.loeschen}" value="Löschen" />
+   			</h:column>
+   		</h:dataTable>
+   		<h:commandButton action="#{comedianHandler.neuanlage}" value="Neuanlage" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   	</h:form>
+</body>
+   
+</html>

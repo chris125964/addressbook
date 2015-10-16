@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+	<!-- https://jira.jboss.org/browse/JBIDE-6295 -->
+	<name>dummy</name>
+	
+	<application>
+		<resource-bundle>
+			<base-name>de.jsfpraxis.ResourceBundle</base-name>
+			<var>resourceBundle</var>
+		</resource-bundle>
+	</application>
+	
+</faces-config>
