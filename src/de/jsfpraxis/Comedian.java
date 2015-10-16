@@ -21,15 +21,15 @@ public class Comedian implements Serializable {
 
 	private static final long serialVersionUID = -7569584658487581798L;
 	private Integer id;
-	private String vorname;
+	private String land;
 	private String nachname;
 	private Date geburtstag;
 
 	public Comedian() {
 	}
 
-	public Comedian(final String vorname, final String nachname, final Date geburtstag) {
-		this.vorname = vorname;
+	public Comedian(final String land, final String nachname, final Date geburtstag) {
+		this.land = land;
 		this.nachname = nachname;
 		this.geburtstag = geburtstag;
 	}
@@ -45,19 +45,11 @@ public class Comedian implements Serializable {
 	}
 
 	public String getVorname() {
-		return this.vorname;
+		return this.land;
 	}
 
-	public void setVorname(final String vorname) {
-		this.vorname = vorname;
-	}
-
-	public String getNachname() {
-		return this.nachname;
-	}
-
-	public void setNachname(final String nachname) {
-		this.nachname = nachname;
+	public void setVorname(final String land) {
+		this.land = land;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -71,6 +63,6 @@ public class Comedian implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Kunde(" + this.id + "): " + this.vorname + " " + this.nachname;
+		return "Kunde(" + this.id + "): " + this.land + " " + this.nachname;
 	}
 }

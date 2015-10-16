@@ -32,7 +32,7 @@ public class ComedianHandler implements Serializable {
 	@Resource
 	private UserTransaction utx;
 
-	private DataModel<Comedian> comedians;
+	private DataModel<Comedian> laender;
 	private Comedian aktuellerComedian = new Comedian();
 
 	public ComedianHandler() {
@@ -47,7 +47,7 @@ public class ComedianHandler implements Serializable {
 			Logger.getAnonymousLogger().log(Level.INFO,
 					"speichern() [2] mit " + this.aktuellerComedian + "' aufgerufen");
 			this.em.persist(this.aktuellerComedian);
-			this.comedians.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt", e.getMessage());
@@ -56,7 +56,7 @@ public class ComedianHandler implements Serializable {
 	}
 
 	public String aendern() {
-		this.aktuellerComedian = this.comedians.getRowData();
+		this.aktuellerComedian = this.laender.getRowData();
 		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuellerComedian);
 		return "/comedian.xhtml";
 	}
@@ -64,17 +64,17 @@ public class ComedianHandler implements Serializable {
 	public String neuanlage() {
 		this.aktuellerComedian = new Comedian();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
-		return "/comedian.xhtml";
+		return "/land.xhtml";
 	}
 
 	public String loeschen() {
-		this.aktuellerComedian = this.comedians.getRowData();
+		this.aktuellerComedian = this.laender.getRowData();
 		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuellerComedian);
 		try {
 			this.utx.begin();
 			this.aktuellerComedian = this.em.merge(this.aktuellerComedian);
 			this.em.remove(this.aktuellerComedian);
-			this.comedians.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -97,8 +97,8 @@ public class ComedianHandler implements Serializable {
 			this.em.persist(new Comedian("Dieter", "Nuhr", new GregorianCalendar(1960, 9, 29).getTime()));
 			this.em.persist(new Comedian("Anke", "Engelke", new GregorianCalendar(1965, 11, 21).getTime()));
 			this.em.persist(new Comedian("Kaya", "Yanar", new GregorianCalendar(1973, 4, 20).getTime()));
-			this.comedians = new ListDataModel<Comedian>();
-			this.comedians.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.laender = new ListDataModel<Comedian>();
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
@@ -106,7 +106,7 @@ public class ComedianHandler implements Serializable {
 	}
 
 	public DataModel<Comedian> getComedians() {
-		return this.comedians;
+		return this.laender;
 	}
 
 	public Comedian getAktuellerComedian() {
