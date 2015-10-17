@@ -5,33 +5,26 @@
 package de.jsfpraxis;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-@NamedQuery(name = "SelectComedians", query = "Select c From Comedian c")
+@NamedQuery(name = "SelectComedians", query = "Select c From Land  c")
 @Entity
-public class Comedian implements Serializable {
+public class Land implements Serializable {
 
 	private static final long serialVersionUID = -7569584658487581798L;
 	private Integer id;
 	private String land;
-	private String nachname;
-	private Date geburtstag;
 
-	public Comedian() {
+	public Land() {
 	}
 
-	public Comedian(final String land, final String nachname, final Date geburtstag) {
+	public Land(final String land) {
 		this.land = land;
-		this.nachname = nachname;
-		this.geburtstag = geburtstag;
 	}
 
 	@Id
@@ -52,17 +45,8 @@ public class Comedian implements Serializable {
 		this.land = land;
 	}
 
-	@Temporal(TemporalType.DATE)
-	public Date getGeburtstag() {
-		return this.geburtstag;
-	}
-
-	public void setGeburtstag(final Date geburtstag) {
-		this.geburtstag = geburtstag;
-	}
-
 	@Override
 	public String toString() {
-		return "Kunde(" + this.id + "): " + this.land + " " + this.nachname;
+		return "Land(" + this.id + "): " + this.land;
 	}
 }

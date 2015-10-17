@@ -6,7 +6,7 @@
 	<persistence-unit name="Adressbuch" transaction-type="JTA">
 		<description>Dieses persistence.xml ist am richtigen Ort</description>
 		<jta-data-source>TutorialJDBCResource</jta-data-source>
-		<class>de.jsfpraxis.Comedian</class>
+		<class>de.jsfpraxis.Land</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.logging.level" value="FINEST" />

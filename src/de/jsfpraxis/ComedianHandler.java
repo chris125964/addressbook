@@ -5,7 +5,6 @@
 package de.jsfpraxis;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,8 +31,8 @@ public class ComedianHandler implements Serializable {
 	@Resource
 	private UserTransaction utx;
 
-	private DataModel<Comedian> laender;
-	private Comedian aktuellerComedian = new Comedian();
+	private DataModel<Land> laender;
+	private Land aktuellerComedian = new Land();
 
 	public ComedianHandler() {
 		Logger.getAnonymousLogger().log(Level.INFO, "Konstruktor ComedianHandler() aufgerufen");
@@ -52,17 +51,17 @@ public class ComedianHandler implements Serializable {
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt", e.getMessage());
 		}
-		return "/anzeige-comedians.xhtml";
+		return "/anzeige-laender.xhtml";
 	}
 
 	public String aendern() {
 		this.aktuellerComedian = this.laender.getRowData();
 		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuellerComedian);
-		return "/comedian.xhtml";
+		return "/land.xhtml";
 	}
 
 	public String neuanlage() {
-		this.aktuellerComedian = new Comedian();
+		this.aktuellerComedian = new Land();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
 		return "/land.xhtml";
 	}
@@ -92,12 +91,12 @@ public class ComedianHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Comedian("Mario", "Barth", new GregorianCalendar(1972, 10, 1).getTime()));
-			this.em.persist(new Comedian("Atze", "Schröder", new GregorianCalendar(1965, 8, 27).getTime()));
-			this.em.persist(new Comedian("Dieter", "Nuhr", new GregorianCalendar(1960, 9, 29).getTime()));
-			this.em.persist(new Comedian("Anke", "Engelke", new GregorianCalendar(1965, 11, 21).getTime()));
-			this.em.persist(new Comedian("Kaya", "Yanar", new GregorianCalendar(1973, 4, 20).getTime()));
-			this.laender = new ListDataModel<Comedian>();
+			this.em.persist(new Land("Mario"));
+			this.em.persist(new Land("Atze"));
+			this.em.persist(new Land("Dieter"));
+			this.em.persist(new Land("Anke"));
+			this.em.persist(new Land("Kaya"));
+			this.laender = new ListDataModel<Land>();
 			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
@@ -105,15 +104,15 @@ public class ComedianHandler implements Serializable {
 		}
 	}
 
-	public DataModel<Comedian> getComedians() {
+	public DataModel<Land> getComedians() {
 		return this.laender;
 	}
 
-	public Comedian getAktuellerComedian() {
+	public Land getAktuellerComedian() {
 		return this.aktuellerComedian;
 	}
 
-	public void setAktuellerComedian(final Comedian aktuellerComedian) {
+	public void setAktuellerComedian(final Land aktuellerComedian) {
 		this.aktuellerComedian = aktuellerComedian;
 	}
 
