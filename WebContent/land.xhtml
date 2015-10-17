@@ -14,13 +14,13 @@
    		<h:panelGrid columns="2" headerClass="header" footerClass="footer">
    			<f:facet name="header">EM-Land anlegen / ändern</f:facet>
    			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
-			<h:outputLabel value="Vorname:" for="vorname" />
+			<h:outputLabel value="Name:" for="vorname" />
    			<h:panelGroup>
-   				<h:inputText id="vorname" value="#{comedianHandler.aktuellerComedian.vorname}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:inputText id="vorname" value="#{landHandler.aktuellesLand.land}" required="true" requiredMessage="Bitte eingeben" />
    				<h:message for="vorname" styleClass="message" />
    			</h:panelGroup>
    		</h:panelGrid>
-   		<h:commandButton id="speichern" action="#{comedianHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   		<h:commandButton id="speichern" action="#{landHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
    	</h:form>
    </body>
    

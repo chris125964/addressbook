@@ -19,11 +19,11 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 /**
- * Einfache Managed-Bean zur Verwaltung von Comedians
+ * Einfache Managed-Bean zur Verwaltung von Laendern
  */
 @ManagedBean
 @SessionScoped
-public class ComedianHandler implements Serializable {
+public class LandHandler implements Serializable {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -32,21 +32,20 @@ public class ComedianHandler implements Serializable {
 	private UserTransaction utx;
 
 	private DataModel<Land> laender;
-	private Land aktuellerComedian = new Land();
+	private Land aktuellesLand = new Land();
 
-	public ComedianHandler() {
-		Logger.getAnonymousLogger().log(Level.INFO, "Konstruktor ComedianHandler() aufgerufen");
+	public LandHandler() {
+		Logger.getAnonymousLogger().log(Level.INFO, "Konstruktor LandHandler() aufgerufen");
 	}
 
 	public String speichern() {
-		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuellerComedian + "' aufgerufen");
+		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuellesLand + "' aufgerufen");
 		try {
 			this.utx.begin();
-			this.aktuellerComedian = this.em.merge(this.aktuellerComedian);
-			Logger.getAnonymousLogger().log(Level.INFO,
-					"speichern() [2] mit " + this.aktuellerComedian + "' aufgerufen");
-			this.em.persist(this.aktuellerComedian);
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.aktuellesLand = this.em.merge(this.aktuellesLand);
+			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuellesLand + "' aufgerufen");
+			this.em.persist(this.aktuellesLand);
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt", e.getMessage());
@@ -55,25 +54,25 @@ public class ComedianHandler implements Serializable {
 	}
 
 	public String aendern() {
-		this.aktuellerComedian = this.laender.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuellerComedian);
+		this.aktuellesLand = this.laender.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuellesLand);
 		return "/land.xhtml";
 	}
 
 	public String neuanlage() {
-		this.aktuellerComedian = new Land();
+		this.aktuellesLand = new Land();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
 		return "/land.xhtml";
 	}
 
 	public String loeschen() {
-		this.aktuellerComedian = this.laender.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuellerComedian);
+		this.aktuellesLand = this.laender.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuellesLand);
 		try {
 			this.utx.begin();
-			this.aktuellerComedian = this.em.merge(this.aktuellerComedian);
-			this.em.remove(this.aktuellerComedian);
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.aktuellesLand = this.em.merge(this.aktuellesLand);
+			this.em.remove(this.aktuellesLand);
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -97,23 +96,23 @@ public class ComedianHandler implements Serializable {
 			this.em.persist(new Land("Anke"));
 			this.em.persist(new Land("Kaya"));
 			this.laender = new ListDataModel<Land>();
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectComedians").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
 		}
 	}
 
-	public DataModel<Land> getComedians() {
+	public DataModel<Land> getLaender() {
 		return this.laender;
 	}
 
-	public Land getAktuellerComedian() {
-		return this.aktuellerComedian;
+	public Land getAktuellesLand() {
+		return this.aktuellesLand;
 	}
 
-	public void setAktuellerComedian(final Land aktuellerComedian) {
-		this.aktuellerComedian = aktuellerComedian;
+	public void setAktuellesLand(final Land aktuellesLand) {
+		this.aktuellesLand = aktuellesLand;
 	}
 
 }

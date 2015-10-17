@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-@NamedQuery(name = "SelectComedians", query = "Select c From Land  c")
+@NamedQuery(name = "SelectLaender", query = "Select c From Land  c")
 @Entity
 public class Land implements Serializable {
 
@@ -37,11 +37,11 @@ public class Land implements Serializable {
 		this.id = id;
 	}
 
-	public String getVorname() {
+	public String getLand() {
 		return this.land;
 	}
 
-	public void setVorname(final String land) {
+	public void setLand(final String land) {
 		this.land = land;
 	}
 

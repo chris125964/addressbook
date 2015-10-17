@@ -4,28 +4,28 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 <head>
-	<title>Anzeige Comedians</title>
+	<title>Anzeige Laender</title>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
    
 <body>
 	<h:form>
-   		<h:dataTable value="#{comedianHandler.comedians}" var="comedian"
+   		<h:dataTable value="#{landHandler.laender}" var="euroland"
    				rowClasses="odd,even" headerClass="header" footerClass="footer">
    			<f:facet name="header">Anzeige aller EM-Länder</f:facet>
    			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
    			<h:column>
    				<f:facet name="header">Land</f:facet>
-   				#{comedian.vorname}
+   				#{euroland.land}
    			</h:column>
    			<h:column>
-   				<h:commandButton action="#{comedianHandler.aendern}" value="Ändern" />
+   				<h:commandButton action="#{landHandler.aendern}" value="Ändern" />
    			</h:column>
    			<h:column>
-   				<h:commandButton action="#{comedianHandler.loeschen}" value="Löschen" />
+   				<h:commandButton action="#{landHandler.loeschen}" value="Löschen" />
    			</h:column>
    		</h:dataTable>
-   		<h:commandButton action="#{comedianHandler.neuanlage}" value="Neuanlage" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   		<h:commandButton action="#{landHandler.neuanlage}" value="Neuanlage" style="width: 80px; margin: 10px 2px 2px 2px;" />
    	</h:form>
 </body>
    
