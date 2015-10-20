@@ -3,8 +3,16 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" 
       xmlns:h="http://java.sun.com/jsf/html" 
       xmlns:f="http://java.sun.com/jsf/core">
+	<h:form>
 	<h:panelGrid columns="2">
 		<f:facet name="header">Login Online</f:facet>
 		
+		<h:outputLabel value="Account: " for="account"/>
+		<h:inputText id="account" required="true" value="#{anwenderHandler.account}" requiredMessage="Bitte Account eingeben"/>
+		<h:outputLabel value="Passwort: " for="passwort"/>
+		<h:inputSecret id="passwort" required="true" value="#{anwenderHandler.passwort}" requiredMessage="Bitte Passwort eingeben"/>
+		<h:panelGroup/>
+		<h:commandButton action="#{anwenderHandler.login}" value="Anmelden" />
 	</h:panelGrid>
+	</h:form>
 </html>
