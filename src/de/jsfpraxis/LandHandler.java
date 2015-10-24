@@ -90,10 +90,6 @@ public class LandHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Land("Mario"));
-			this.em.persist(new Land("Atze"));
-			this.em.persist(new Land("Dieter"));
-			this.em.persist(new Land("Anke"));
 			this.em.persist(new Land("Kaya"));
 			this.laender = new ListDataModel<Land>();
 			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());

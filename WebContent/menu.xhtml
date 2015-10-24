@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    
+
 <ui:composition
 	xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h:form>
-
-	<ul>
-    	<li>
-       		<h:commandLink value="Übersicht über die Länder" immediate="true" 
-       			action="anzeige-laender.xhtml?faces-redirect=true" />
-       	</li>
-       	<li>
-       		<h:commandLink value="Abmelden"  immediate="true" 
-       			action="#{anwenderHandler.logout}" />
-       	</li>
-       	
-     </ul>
-
-	</h:form>
-</ui:composition>	
+		<ul>
+			<li><h:commandLink value="Übersicht über die Länder"
+					immediate="true" action="anzeige-laender.xhtml?faces-redirect=true" />
+			</li>
+			<li><h:commandLink value="Abmelden" immediate="true"
+					action="#{anwenderHandler.logout}" /></li>
+		</ul>
+</ui:composition>
 
