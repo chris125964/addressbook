@@ -1,32 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:f="http://java.sun.com/jsf/core">
 
-<head>
-	<title>Anzeige Laender</title>
-	<link rel="stylesheet" href="style.css" type="text/css" />
-</head>
-   
-<body>
-	<h:form>
-   		<h:dataTable value="#{landHandler.laender}" var="euroland"
-   				rowClasses="odd,even" headerClass="header" footerClass="footer">
-   			<f:facet name="header">Anzeige aller EM-Länder</f:facet>
-   			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
-   			<h:column>
-   				<f:facet name="header">Land</f:facet>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout.xhtml">
+
+	<ui:define name="header">
+		<div id="header">Anzeige aller Laender</div>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:form>
+			<h:dataTable value="#{landHandler.laender}" var="euroland"
+				rowClasses="odd,even" headerClass="header" footerClass="footer">
+				<f:facet name="header">Anzeige aller EM-Länder</f:facet>
+				<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+				<h:column>
+					<f:facet name="header">Land</f:facet>
    				#{euroland.land}
-   			</h:column>
-   			<h:column>
-   				<h:commandButton action="#{landHandler.aendern}" value="Ändern" />
-   			</h:column>
-   			<h:column>
-   				<h:commandButton action="#{landHandler.loeschen}" value="Löschen" />
-   			</h:column>
-   		</h:dataTable>
-   		<h:commandButton action="#{landHandler.neuanlage}" value="Neuanlage" style="width: 80px; margin: 10px 2px 2px 2px;" />
-   	</h:form>
-</body>
-   
-</html>
+   				</h:column>
+				<h:column>
+					<h:commandButton action="#{landHandler.aendern}" value="Ändern" />
+				</h:column>
+				<h:column>
+					<h:commandButton action="#{landHandler.loeschen}" value="Löschen" />
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{landHandler.neuanlage}" value="Neuanlage"
+				style="width: 80px; margin: 10px 2px 2px 2px;" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
