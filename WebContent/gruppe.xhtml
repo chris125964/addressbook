@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core">
+
+   <head>
+   	<title>EM-Gruppe anlegen / ändern</title>
+   	<link rel="stylesheet" href="style.css" type="text/css" />
+   </head>
+   
+   <body>
+   	<h:form>
+   		<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+   			<f:facet name="header">EM-Gruppe anlegen / ändern</f:facet>
+   			<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+			<h:outputLabel value="Kennzeichen:" for="kenner" />
+   			<h:panelGroup>
+   				<h:inputText id="kenner" value="#{gruppenHandler.aktuelleGruppe.kennzeichen}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:message for="kenner" styleClass="message" />
+   			</h:panelGroup>
+   		</h:panelGrid>
+   		<h:commandButton id="speichern" action="#{gruppenHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   	</h:form>
+   </body>
+   
+</html>

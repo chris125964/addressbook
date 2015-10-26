@@ -110,5 +110,4 @@ public class LandHandler implements Serializable {
 	public void setAktuellesLand(final Land aktuellesLand) {
 		this.aktuellesLand = aktuellesLand;
 	}
-
 }
