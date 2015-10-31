@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout.xhtml">
+
+	<ui:define name="header">
+		<div id="header">Anzeige aller Anwender</div>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:form>
+			<h:dataTable value="#{anwenderHandler.anwender}" var="account"
+				rowClasses="odd,even" headerClass="header" footerClass="footer">
+				<f:facet name="header">Anzeige aller Accounts</f:facet>
+				<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+				<h:column>
+					<f:facet name="header">Account</f:facet>
+   					#{account.account}
+   				</h:column>
+				<h:column>
+					<h:commandButton action="#{anwenderHandler.aendern}" value="Ändern" />
+				</h:column>
+				<h:column>
+					<h:commandButton action="#{anwenderHandler.loeschen}" value="Löschen" />
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{anwenderHandler.neuanlage}" value="Neuanlage"
+				style="width: 80px; margin: 10px 2px 2px 2px;" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -20,6 +20,10 @@ public class Gruppe implements Serializable {
 		super();
 	}
 
+	public Gruppe(final Character c) {
+		this.kennzeichen = c;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {

@@ -1,7 +1,3 @@
-/*
- *  (c) Bernd Müller, www.jsfpraxis.de
- */
-
 package de.jsfpraxis;
 
 import java.io.Serializable;

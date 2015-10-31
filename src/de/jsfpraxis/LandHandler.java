@@ -1,7 +1,3 @@
-/*
- *  (c) Bernd Müller, www.jsfpraxis.de
- */
-
 package de.jsfpraxis;
 
 import java.io.Serializable;
@@ -90,7 +86,7 @@ public class LandHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Land("Kaya"));
+			this.em.persist(new Land("England"));
 			this.laender = new ListDataModel<Land>();
 			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
 			this.utx.commit();

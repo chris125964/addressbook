@@ -6,14 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
+@NamedQuery(name = "SelectAnwender", query = "Select c From Anwender c")
 @Entity
 public class Anwender implements Serializable {
 
 	private static final long serialVersionUID = -516421438352337764L;
 	private Integer id;
-	private String nummer;
+	private String account;
 	private String passwort;
+
+	public Anwender() {
+	}
+
+	public Anwender(final String account) {
+		this.account = account;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +34,12 @@ public class Anwender implements Serializable {
 		this.id = id;
 	}
 
-	public String getNummer() {
-		return this.nummer;
+	public String getAccount() {
+		return this.account;
 	}
 
-	public void setNummer(final String nummer) {
-		this.nummer = nummer;
+	public void setAccount(final String account) {
+		this.account = account;
 	}
 
 	public String getPasswort() {
@@ -39,6 +48,11 @@ public class Anwender implements Serializable {
 
 	public void setPasswort(final String passwort) {
 		this.passwort = passwort;
+	}
+
+	@Override
+	public String toString() {
+		return "Anwender(" + this.id + "): " + this.account;
 	}
 
 }

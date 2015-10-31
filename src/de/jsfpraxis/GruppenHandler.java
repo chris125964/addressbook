@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
@@ -73,6 +75,27 @@ public class GruppenHandler implements Serializable {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
 		}
 		return null;
+	}
+
+	@PostConstruct
+	public void init() {
+		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
+		try {
+			this.utx.begin();
+			this.em.persist(new Gruppe('A'));
+			this.em.persist(new Gruppe('B'));
+			this.em.persist(new Gruppe('C'));
+			this.em.persist(new Gruppe('D'));
+			this.em.persist(new Gruppe('E'));
+			this.em.persist(new Gruppe('F'));
+			this.em.persist(new Gruppe('G'));
+			this.em.persist(new Gruppe('H'));
+			this.gruppen = new ListDataModel<Gruppe>();
+			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.utx.commit();
+		} catch (Exception e) {
+			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
+		}
 	}
 
 	public DataModel<Gruppe> getGruppen() {
