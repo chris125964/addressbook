@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @NamedQuery(name = "SelectLaender", query = "Select c From Land  c")
@@ -13,8 +14,12 @@ import javax.persistence.NamedQuery;
 public class Land implements Serializable {
 
 	private static final long serialVersionUID = -7569584658487581798L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String land;
+	@ManyToOne
+	private Gruppe gruppe;
 
 	public Land() {
 	}
@@ -23,8 +28,6 @@ public class Land implements Serializable {
 		this.land = land;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getId() {
 		return this.id;
 	}
@@ -39,6 +42,14 @@ public class Land implements Serializable {
 
 	public void setLand(final String land) {
 		this.land = land;
+	}
+
+	public void setGruppe(final Gruppe gruppe) {
+		this.gruppe = gruppe;
+	}
+
+	public Gruppe getGruppe() {
+		return this.gruppe;
 	}
 
 	@Override
