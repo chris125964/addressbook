@@ -29,6 +29,7 @@ public class LandHandler implements Serializable {
 
 	private DataModel<Land> laender;
 	private Land aktuellesLand = new Land();
+	private Integer gruppenID;
 
 	public LandHandler() {
 		Logger.getAnonymousLogger().log(Level.INFO, "Konstruktor LandHandler() aufgerufen");
@@ -39,6 +40,9 @@ public class LandHandler implements Serializable {
 		try {
 			this.utx.begin();
 			this.aktuellesLand = this.em.merge(this.aktuellesLand);
+			Gruppe gefundeneGruppe = this.em.find(Gruppe.class, this.getGruppenID());
+			this.aktuellesLand.setGruppe(gefundeneGruppe);
+			// this.aktuellesLand.setGruppe();
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuellesLand + "' aufgerufen");
 			this.em.persist(this.aktuellesLand);
 			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
@@ -106,4 +110,13 @@ public class LandHandler implements Serializable {
 	public void setAktuellesLand(final Land aktuellesLand) {
 		this.aktuellesLand = aktuellesLand;
 	}
+
+	public Integer getGruppenID() {
+		return this.gruppenID;
+	}
+
+	public void setGruppenID(final Integer gruppenID) {
+		this.gruppenID = gruppenID;
+	}
+
 }
