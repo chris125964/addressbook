@@ -1,15 +1,12 @@
 package de.jsfpraxis;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @NamedQuery(name = "SelectGruppen", query = "Select c From Gruppe c order by c.kennzeichen")
 @Entity
@@ -20,8 +17,10 @@ public class Gruppe implements Serializable {
 	@Id
 	private Integer id;
 	private Character kennzeichen;
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Land> teams;
+	private Land team1;
+	private Land team2;
+	private Land team3;
+	private Land team4;
 
 	public Gruppe() {
 		super();
@@ -47,17 +46,41 @@ public class Gruppe implements Serializable {
 		this.kennzeichen = kennzeichen;
 	}
 
-	public void setTeams(final List<Land> teams) {
-		this.teams = teams;
-	}
-
-	public List<Land> getTeams() {
-		return this.teams;
-	}
-
 	@Override
 	public String toString() {
 		return "Gruppe [kennzeichen=" + this.kennzeichen + "]";
+	}
+
+	public Land getTeam1() {
+		return this.team1;
+	}
+
+	public void setTeam1(final Land team1) {
+		this.team1 = team1;
+	}
+
+	public Land getTeam2() {
+		return this.team2;
+	}
+
+	public void setTeam2(final Land team2) {
+		this.team2 = team2;
+	}
+
+	public Land getTeam3() {
+		return this.team3;
+	}
+
+	public void setTeam3(final Land team3) {
+		this.team3 = team3;
+	}
+
+	public Land getTeam4() {
+		return this.team4;
+	}
+
+	public void setTeam4(final Land team4) {
+		this.team4 = team4;
 	}
 
 }

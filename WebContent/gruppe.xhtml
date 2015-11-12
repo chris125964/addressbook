@@ -20,7 +20,33 @@
    				<h:message for="kenner" styleClass="message" />
    			</h:panelGroup>
    		</h:panelGrid>
-   		<h:commandButton id="speichern" action="#{gruppenHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
+		<h:panelGroup>
+			<h:selectOneMenu id="team1" value="#{gruppenHandler.teamId1}">
+				<f:selectItems value="#{landHandler.laender}"
+						var="selektiertesTeam1"
+						itemValue="#{selektiertesTeam1.id}"
+						itemLabel="#{selektiertesTeam1.land}"/>
+			</h:selectOneMenu>
+			<h:selectOneMenu id="team2" value="#{gruppenHandler.teamId2}">
+				<f:selectItems value="#{landHandler.laender}"
+						var="selektiertesTeam2"
+						itemValue="#{selektiertesTeam2.id}"
+						itemLabel="#{selektiertesTeam2.land}"/>
+			</h:selectOneMenu>
+			<h:selectOneMenu id="team3" value="#{gruppenHandler.teamId3}">
+				<f:selectItems value="#{landHandler.laender}"
+						var="selektiertesTeam3"
+						itemValue="#{selektiertesTeam3.id}"
+						itemLabel="#{selektiertesTeam3.land}"/>
+			</h:selectOneMenu>
+			<h:selectOneMenu id="team4" value="#{gruppenHandler.teamId4}">
+				<f:selectItems value="#{landHandler.laender}"
+						var="selektiertesTeam4"
+						itemValue="#{selektiertesTeam4.id}"
+						itemLabel="#{selektiertesTeam4.land}"/>
+			</h:selectOneMenu>
+		</h:panelGroup>
+		<h:commandButton id="speichern" action="#{gruppenHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
    	</h:form>
    </body>
    

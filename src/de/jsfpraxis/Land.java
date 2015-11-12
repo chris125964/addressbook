@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @NamedQuery(name = "SelectLaender", query = "Select c From Land  c")
@@ -18,8 +17,8 @@ public class Land implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String land;
-	@ManyToOne
 	private Gruppe gruppe;
+	private Integer nummerInGruppe;
 
 	public Land() {
 	}
