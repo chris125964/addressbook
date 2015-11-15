@@ -3,9 +3,9 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 
-	<persistence-unit name="Adressbuch" transaction-type="JTA">
+	<persistence-unit name="Euro2016" transaction-type="JTA">
 		<description>Dieses persistence.xml ist am richtigen Ort</description>
-		<jta-data-source>TutorialJDBCResource</jta-data-source>
+		<jta-data-source>jdbc/__euro</jta-data-source>
 		<class>de.jsfpraxis.Land</class>
 		<class>de.jsfpraxis.Anwender</class>
 		<class>de.jsfpraxis.Gruppe</class>
@@ -14,7 +14,7 @@
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
             <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>			
-			<property name="eclipselink.logging.level" value="FINEST" />
+			<property name="eclipselink.logging.level" value="FINE" />
 			<!-- 
 			<property name="eclipselink.jdbc.user" value="APP" />
 			<property name="eclipselink.jdbc.password" value="APP" />

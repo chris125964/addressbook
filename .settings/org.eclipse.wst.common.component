@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Adressbuch">
+    <wb-module deploy-name="euro1"> <!-- der Deploy-Name ist im Server in Klammern eingetragen -->
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Adressbuch"/>
-        <property name="java-output-path" value="/Adressbuch/build/classes"/>
+        <property name="context-root" value="euro2"/>
+        <property name="java-output-path" value="/euro3/build/classes"/>
     </wb-module>
 </project-modules>
