@@ -15,6 +15,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import de.euro2016.model.Land;
+
 @ManagedBean
 @SessionScoped
 public class GruppenHandler implements Serializable {

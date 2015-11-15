@@ -14,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import de.euro2016.model.Land;
+
 /**
  * Einfache Managed-Bean zur Verwaltung von Laendern
  */
@@ -41,11 +43,10 @@ public class LandHandler implements Serializable {
 			this.utx.begin();
 			this.aktuellesLand = this.em.merge(this.aktuellesLand);
 			Gruppe gefundeneGruppe = this.em.find(Gruppe.class, this.getGruppenID());
-			this.aktuellesLand.setGruppe(gefundeneGruppe);
 			// this.aktuellesLand.setGruppe();
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuellesLand + "' aufgerufen");
 			this.em.persist(this.aktuellesLand);
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt", e.getMessage());
@@ -72,7 +73,7 @@ public class LandHandler implements Serializable {
 			this.utx.begin();
 			this.aktuellesLand = this.em.merge(this.aktuellesLand);
 			this.em.remove(this.aktuellesLand);
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -92,7 +93,7 @@ public class LandHandler implements Serializable {
 			this.utx.begin();
 			this.em.persist(new Land("England"));
 			this.laender = new ListDataModel<Land>();
-			this.laender.setWrappedData(this.em.createNamedQuery("SelectLaender").getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());

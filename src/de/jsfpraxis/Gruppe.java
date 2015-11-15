@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import de.euro2016.model.Land;
+
 @NamedQuery(name = "SelectGruppen", query = "Select c From Gruppe c order by c.kennzeichen")
 @Entity
 public class Gruppe implements Serializable {

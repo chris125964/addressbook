@@ -16,7 +16,7 @@
    			<f:facet name="footer">Footer: #{resourceBundle.copyright}</f:facet>
 			<h:outputLabel value="Name:" for="laendername" />
    			<h:panelGroup>
-   				<h:inputText id="vorname" value="#{landHandler.aktuellesLand.land}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:inputText id="vorname" value="#{landHandler.aktuellesLand.name}" required="true" requiredMessage="Bitte eingeben" />
    				<h:message for="vorname" styleClass="message" />
    			</h:panelGroup>
    			<h:panelGroup>

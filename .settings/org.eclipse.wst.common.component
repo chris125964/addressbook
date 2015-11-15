@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="euro1"> <!-- der Deploy-Name ist im Server in Klammern eingetragen -->
+    <wb-module deploy-name="euro2016"> <!-- der Deploy-Name ist im Server in Klammern eingetragen -->
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="euro2"/>
+        <property name="context-root" value="Euro2016"/> <!-- der Kontext wird in der Adresszeile verwendet, z.B. localhost:8080/euro2016/login.jsf  -->
         <property name="java-output-path" value="/euro3/build/classes"/>
     </wb-module>
 </project-modules>
