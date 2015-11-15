@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.controller;
 
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -14,14 +14,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-import de.euro2016.model.Land;
+import de.euro2016.model.Team;
+import de.jsfpraxis.Gruppe;
 
 /**
  * Einfache Managed-Bean zur Verwaltung von Laendern
  */
 @ManagedBean
 @SessionScoped
-public class LandHandler implements Serializable {
+public class TeamHandler implements Serializable {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -29,11 +30,11 @@ public class LandHandler implements Serializable {
 	@Resource
 	private UserTransaction utx;
 
-	private DataModel<Land> laender;
-	private Land aktuellesLand = new Land();
+	private DataModel<Team> laender;
+	private Team aktuellesLand = new Team();
 	private Integer gruppenID;
 
-	public LandHandler() {
+	public TeamHandler() {
 		Logger.getAnonymousLogger().log(Level.INFO, "Konstruktor LandHandler() aufgerufen");
 	}
 
@@ -46,7 +47,7 @@ public class LandHandler implements Serializable {
 			// this.aktuellesLand.setGruppe();
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuellesLand + "' aufgerufen");
 			this.em.persist(this.aktuellesLand);
-			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery(Team.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt", e.getMessage());
@@ -61,7 +62,7 @@ public class LandHandler implements Serializable {
 	}
 
 	public String neuanlage() {
-		this.aktuellesLand = new Land();
+		this.aktuellesLand = new Team();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
 		return "/land.xhtml";
 	}
@@ -73,7 +74,7 @@ public class LandHandler implements Serializable {
 			this.utx.begin();
 			this.aktuellesLand = this.em.merge(this.aktuellesLand);
 			this.em.remove(this.aktuellesLand);
-			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
+			this.laender.setWrappedData(this.em.createNamedQuery(Team.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -91,24 +92,24 @@ public class LandHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Land("England"));
-			this.laender = new ListDataModel<Land>();
-			this.laender.setWrappedData(this.em.createNamedQuery(Land.findAll).getResultList());
+			this.em.persist(new Team("England"));
+			this.laender = new ListDataModel<Team>();
+			this.laender.setWrappedData(this.em.createNamedQuery(Team.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
 		}
 	}
 
-	public DataModel<Land> getLaender() {
+	public DataModel<Team> getLaender() {
 		return this.laender;
 	}
 
-	public Land getAktuellesLand() {
+	public Team getAktuellesLand() {
 		return this.aktuellesLand;
 	}
 
-	public void setAktuellesLand(final Land aktuellesLand) {
+	public void setAktuellesLand(final Team aktuellesLand) {
 		this.aktuellesLand = aktuellesLand;
 	}
 

@@ -11,7 +11,7 @@
 
 	<ui:define name="main">
 		<h:form>
-			<h:dataTable value="#{landHandler.laender}" var="euroland"
+			<h:dataTable value="#{teamHandler.laender}" var="euroland"
 				rowClasses="odd,even" headerClass="header" footerClass="footer">
 				<f:facet name="header">Anzeige aller EM-Länder</f:facet>
 				<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
@@ -20,13 +20,13 @@
    					#{euroland.name}
    				</h:column>
 				<h:column>
-					<h:commandButton action="#{landHandler.aendern}" value="Ändern" />
+					<h:commandButton action="#{teamHandler.aendern}" value="Ändern" />
 				</h:column>
 				<h:column>
-					<h:commandButton action="#{landHandler.loeschen}" value="Löschen" />
+					<h:commandButton action="#{teamHandler.loeschen}" value="Löschen" />
 				</h:column>
 			</h:dataTable>
-			<h:commandButton action="#{landHandler.neuanlage}" value="Neuanlage"
+			<h:commandButton action="#{teamHandler.neuanlage}" value="Neuanlage"
 				style="width: 80px; margin: 10px 2px 2px 2px;" />
 		</h:form>
 	</ui:define>

@@ -8,9 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-@NamedQuery(name = Land.findAll, query = "Select c From Team  c")
+@NamedQuery(name = Team.findAll, query = "Select c From Team  c")
 @Entity(name = "Team")
-public class Land implements Serializable {
+public class Team implements Serializable {
 
 	private static final long serialVersionUID = -7569584658487581798L;
 
@@ -21,10 +21,10 @@ public class Land implements Serializable {
 	private Integer id;
 	private String name;
 
-	public Land() {
+	public Team() {
 	}
 
-	public Land(final String name) {
+	public Team(final String name) {
 		this.name = name;
 	}
 

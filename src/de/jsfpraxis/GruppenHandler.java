@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-import de.euro2016.model.Land;
+import de.euro2016.model.Team;
 
 @ManagedBean
 @SessionScoped
@@ -33,7 +33,7 @@ public class GruppenHandler implements Serializable {
 
 	private DataModel<Gruppe> gruppen;
 	private Gruppe aktuelleGruppe = new Gruppe();
-	private List<Land> listLaender;
+	private List<Team> listLaender;
 	private Integer teamId1;
 	private Integer teamId2;
 	private Integer teamId3;
@@ -47,16 +47,16 @@ public class GruppenHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuelleGruppe + "' aufgerufen");
 		try {
 			this.utx.begin();
-			Land gefundenesLand1 = this.em.find(Land.class, this.getTeamId1());
-			Land gefundenesLand2 = this.em.find(Land.class, this.getTeamId2());
-			Land gefundenesLand3 = this.em.find(Land.class, this.getTeamId3());
-			Land gefundenesLand4 = this.em.find(Land.class, this.getTeamId4());
+			Team gefundenesLand1 = this.em.find(Team.class, this.getTeamId1());
+			Team gefundenesLand2 = this.em.find(Team.class, this.getTeamId2());
+			Team gefundenesLand3 = this.em.find(Team.class, this.getTeamId3());
+			Team gefundenesLand4 = this.em.find(Team.class, this.getTeamId4());
 			this.speichereGruppe(this.aktuelleGruppe, gefundenesLand1, gefundenesLand2, gefundenesLand3,
 					gefundenesLand4);
-			this.speichereLand(gefundenesLand1, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand2, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand3, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand4, this.aktuelleGruppe);
+			this.speichereLand(gefundenesLand1);
+			this.speichereLand(gefundenesLand2);
+			this.speichereLand(gefundenesLand3);
+			this.speichereLand(gefundenesLand4);
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuelleGruppe + "' aufgerufen");
 			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
 			this.utx.commit();
@@ -66,8 +66,8 @@ public class GruppenHandler implements Serializable {
 		return "/anzeige-gruppen.xhtml";
 	}
 
-	private void speichereGruppe(final Gruppe pGruppe, final Land pLand1, final Land pLand2, final Land pLand3,
-			final Land pLand4) {
+	private void speichereGruppe(final Gruppe pGruppe, final Team pLand1, final Team pLand2, final Team pLand3,
+			final Team pLand4) {
 		Gruppe gruppe = this.em.merge(pGruppe);
 		gruppe.setTeam1(pLand1);
 		gruppe.setTeam2(pLand2);
@@ -76,9 +76,8 @@ public class GruppenHandler implements Serializable {
 		this.em.persist(gruppe);
 	}
 
-	private void speichereLand(final Land pLand, final Gruppe pGruppe) {
-		Land land = this.em.merge(pLand);
-		land.setGruppe(pGruppe);
+	private void speichereLand(final Team pLand) {
+		Team land = this.em.merge(pLand);
 		this.em.persist(land);
 	}
 
@@ -146,11 +145,11 @@ public class GruppenHandler implements Serializable {
 		this.aktuelleGruppe = aktuelleGruppe;
 	}
 
-	public List<Land> getListLaender() {
+	public List<Team> getListLaender() {
 		return this.listLaender;
 	}
 
-	public void setListLaender(final List<Land> listLaender) {
+	public void setListLaender(final List<Team> listLaender) {
 		this.listLaender = listLaender;
 	}
 

@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-import de.euro2016.model.Land;
+import de.euro2016.model.Team;
 
 @NamedQuery(name = "SelectGruppen", query = "Select c From Gruppe c order by c.kennzeichen")
 @Entity
@@ -19,10 +19,10 @@ public class Gruppe implements Serializable {
 	@Id
 	private Integer id;
 	private Character kennzeichen;
-	private Land team1;
-	private Land team2;
-	private Land team3;
-	private Land team4;
+	private Team team1;
+	private Team team2;
+	private Team team3;
+	private Team team4;
 
 	public Gruppe() {
 		super();
@@ -53,35 +53,35 @@ public class Gruppe implements Serializable {
 		return "Gruppe [kennzeichen=" + this.kennzeichen + "]";
 	}
 
-	public Land getTeam1() {
+	public Team getTeam1() {
 		return this.team1;
 	}
 
-	public void setTeam1(final Land team1) {
+	public void setTeam1(final Team team1) {
 		this.team1 = team1;
 	}
 
-	public Land getTeam2() {
+	public Team getTeam2() {
 		return this.team2;
 	}
 
-	public void setTeam2(final Land team2) {
+	public void setTeam2(final Team team2) {
 		this.team2 = team2;
 	}
 
-	public Land getTeam3() {
+	public Team getTeam3() {
 		return this.team3;
 	}
 
-	public void setTeam3(final Land team3) {
+	public void setTeam3(final Team team3) {
 		this.team3 = team3;
 	}
 
-	public Land getTeam4() {
+	public Team getTeam4() {
 		return this.team4;
 	}
 
-	public void setTeam4(final Land team4) {
+	public void setTeam4(final Team team4) {
 		this.team4 = team4;
 	}
 
