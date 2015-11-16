@@ -14,8 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import de.euro2016.model.Gruppe;
 import de.euro2016.model.Team;
-import de.jsfpraxis.Gruppe;
 
 /**
  * Einfache Managed-Bean zur Verwaltung von Laendern

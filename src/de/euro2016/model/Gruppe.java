@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.model;
 
 import java.io.Serializable;
 
@@ -8,13 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-import de.euro2016.model.Team;
-
-@NamedQuery(name = "SelectGruppen", query = "Select c From Gruppe c order by c.kennzeichen")
+@NamedQuery(name = Gruppe.findAll, query = "Select c From Gruppe c order by c.kennzeichen")
 @Entity
 public class Gruppe implements Serializable {
 
 	private static final long serialVersionUID = -5529994540448820088L;
+
+	public static final String findAll = "Group.findAll";
+
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private Integer id;
@@ -50,7 +51,7 @@ public class Gruppe implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Gruppe [kennzeichen=" + this.kennzeichen + "]";
+		return "Group [kennzeichen=" + this.kennzeichen + "]";
 	}
 
 	public Team getTeam1() {

@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import de.euro2016.model.Gruppe;
 import de.euro2016.model.Team;
 
 @ManagedBean
@@ -58,7 +59,7 @@ public class GruppenHandler implements Serializable {
 			this.speichereLand(gefundenesLand3);
 			this.speichereLand(gefundenesLand4);
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuelleGruppe + "' aufgerufen");
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt: " + e.getMessage());
@@ -100,7 +101,7 @@ public class GruppenHandler implements Serializable {
 			this.utx.begin();
 			this.aktuelleGruppe = this.em.merge(this.aktuelleGruppe);
 			this.em.remove(this.aktuelleGruppe);
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -122,7 +123,7 @@ public class GruppenHandler implements Serializable {
 			this.em.persist(new Gruppe('G'));
 			this.em.persist(new Gruppe('H'));
 			this.gruppen = new ListDataModel<Gruppe>();
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
