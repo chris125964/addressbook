@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-import de.euro2016.model.Gruppe;
 import de.euro2016.model.Team;
 
 /**
@@ -43,7 +42,6 @@ public class TeamHandler implements Serializable {
 		try {
 			this.utx.begin();
 			this.aktuellesLand = this.em.merge(this.aktuellesLand);
-			Gruppe gefundeneGruppe = this.em.find(Gruppe.class, this.getGruppenID());
 			// this.aktuellesLand.setGruppe();
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuellesLand + "' aufgerufen");
 			this.em.persist(this.aktuellesLand);

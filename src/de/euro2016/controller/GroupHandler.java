@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,11 +20,11 @@ import de.euro2016.model.Team;
 
 @ManagedBean
 @SessionScoped
-public class GruppenHandler implements Serializable {
+public class GroupHandler implements Serializable {
 
 	private static final long serialVersionUID = -6544110274546711076L;
 
-	private static Logger logger = Logger.getLogger(GruppenHandler.class.getCanonicalName());
+	private static Logger logger = Logger.getLogger(GroupHandler.class.getCanonicalName());
 
 	@PersistenceContext
 	private EntityManager em;
@@ -32,34 +32,34 @@ public class GruppenHandler implements Serializable {
 	@Resource
 	private UserTransaction utx;
 
-	private DataModel<Gruppe> gruppen;
-	private Gruppe aktuelleGruppe = new Gruppe();
+	private DataModel<Gruppe> groups;
+	private Gruppe currentGroup = new Gruppe();
 	private List<Team> listLaender;
 	private Integer teamId1;
 	private Integer teamId2;
 	private Integer teamId3;
 	private Integer teamId4;
 
-	public GruppenHandler() {
-		logger.log(Level.INFO, GruppenHandler.class.getName() + "-Instanz erzeugt");
+	public GroupHandler() {
+		logger.log(Level.INFO, GroupHandler.class.getName() + "-Instanz erzeugt");
 	}
 
 	public String speichern() {
-		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuelleGruppe + "' aufgerufen");
+		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.currentGroup + "' aufgerufen");
 		try {
 			this.utx.begin();
 			Team gefundenesLand1 = this.em.find(Team.class, this.getTeamId1());
 			Team gefundenesLand2 = this.em.find(Team.class, this.getTeamId2());
 			Team gefundenesLand3 = this.em.find(Team.class, this.getTeamId3());
 			Team gefundenesLand4 = this.em.find(Team.class, this.getTeamId4());
-			this.speichereGruppe(this.aktuelleGruppe, gefundenesLand1, gefundenesLand2, gefundenesLand3,
+			this.speichereGruppe(this.currentGroup, gefundenesLand1, gefundenesLand2, gefundenesLand3,
 					gefundenesLand4);
 			this.speichereLand(gefundenesLand1);
 			this.speichereLand(gefundenesLand2);
 			this.speichereLand(gefundenesLand3);
 			this.speichereLand(gefundenesLand4);
-			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuelleGruppe + "' aufgerufen");
-			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
+			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.currentGroup + "' aufgerufen");
+			this.groups.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt: " + e.getMessage());
@@ -83,25 +83,25 @@ public class GruppenHandler implements Serializable {
 	}
 
 	public String aendern() {
-		this.aktuelleGruppe = this.gruppen.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuelleGruppe);
+		this.currentGroup = this.groups.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.currentGroup);
 		return "/gruppe.xhtml";
 	}
 
 	public String neuanlage() {
-		this.aktuelleGruppe = new Gruppe();
+		this.currentGroup = new Gruppe();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
 		return "/gruppe.xhtml";
 	}
 
 	public String loeschen() {
-		this.aktuelleGruppe = this.gruppen.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuelleGruppe);
+		this.currentGroup = this.groups.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.currentGroup);
 		try {
 			this.utx.begin();
-			this.aktuelleGruppe = this.em.merge(this.aktuelleGruppe);
-			this.em.remove(this.aktuelleGruppe);
-			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
+			this.currentGroup = this.em.merge(this.currentGroup);
+			this.em.remove(this.currentGroup);
+			this.groups.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -122,28 +122,28 @@ public class GruppenHandler implements Serializable {
 			this.em.persist(new Gruppe('F'));
 			this.em.persist(new Gruppe('G'));
 			this.em.persist(new Gruppe('H'));
-			this.gruppen = new ListDataModel<Gruppe>();
-			this.gruppen.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
+			this.groups = new ListDataModel<Gruppe>();
+			this.groups.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
 		}
 	}
 
-	public DataModel<Gruppe> getGruppen() {
-		return this.gruppen;
+	public DataModel<Gruppe> getGroups() {
+		return this.groups;
 	}
 
-	public void setGruppen(final DataModel<Gruppe> gruppen) {
-		this.gruppen = gruppen;
+	public void setGroups(final DataModel<Gruppe> gruppen) {
+		this.groups = gruppen;
 	}
 
-	public Gruppe getAktuelleGruppe() {
-		return this.aktuelleGruppe;
+	public Gruppe getCurrentGroup() {
+		return this.currentGroup;
 	}
 
-	public void setAktuelleGruppe(final Gruppe aktuelleGruppe) {
-		this.aktuelleGruppe = aktuelleGruppe;
+	public void setCurrentGroup(final Gruppe currentGroup) {
+		this.currentGroup = currentGroup;
 	}
 
 	public List<Team> getListLaender() {
