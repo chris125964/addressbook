@@ -19,6 +19,18 @@
 					<f:facet name="header">Gruppen</f:facet>
    					#{euroGruppe.kennzeichen}
    				</h:column>
+   				<h:column>
+   					#{euroGruppe.team1.name}
+   				</h:column>
+   				<h:column>
+   					#{euroGruppe.team2.name}
+   				</h:column>
+   				<h:column>
+   					#{euroGruppe.team3.name}
+   				</h:column>
+   				<h:column>
+   					#{euroGruppe.team4.name}
+   				</h:column>
 				<h:column>
 					<h:commandButton action="#{groupHandler.aendern}" value="Ändern" />
 				</h:column>
