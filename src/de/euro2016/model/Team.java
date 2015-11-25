@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 
 @NamedQuery(name = Team.findAll, query = "Select c From Team  c")
@@ -20,12 +21,16 @@ public class Team implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String imagePath;
+	@Lob
+	private byte[] flag;
 
 	public Team() {
 	}
 
-	public Team(final String name) {
+	public Team(final String name, final String imagePath) {
 		this.name = name;
+		this.imagePath = imagePath;
 	}
 
 	public Integer getId() {
@@ -42,6 +47,22 @@ public class Team implements Serializable {
 
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	public byte[] getFlag() {
+		return this.flag;
+	}
+
+	public void setFlag(final byte[] flag) {
+		this.flag = flag;
+	}
+
+	public String getImagePath() {
+		return this.imagePath;
+	}
+
+	public void setImagePath(final String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	@Override

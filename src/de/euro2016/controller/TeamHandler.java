@@ -23,8 +23,13 @@ import de.euro2016.model.Team;
 @SessionScoped
 public class TeamHandler implements Serializable {
 
+	private static final long serialVersionUID = -3907213515737033925L;
+
 	@PersistenceContext
 	private EntityManager em;
+
+	// @EJB
+	// private ImageService service;
 
 	@Resource
 	private UserTransaction utx;
@@ -90,7 +95,30 @@ public class TeamHandler implements Serializable {
 		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Team("England"));
+			this.em.persist(new Team("Albanien", "Albanien.gif")); // 1
+			this.em.persist(new Team("Belgien", "Belgien.gif")); // 2
+			this.em.persist(new Team("Deutschland", "Deutschland.gif")); // 3
+			this.em.persist(new Team("England", "England.gif")); // 4
+			this.em.persist(new Team("Frankreich", "Frankreich.gif")); // 5
+			this.em.persist(new Team("Irland", "Irland.gif")); // 6
+			this.em.persist(new Team("Island", "Island.gif")); // 7
+			this.em.persist(new Team("Italien", "Italien.gif")); // 8
+			this.em.persist(new Team("Kroatien", "Kroatien.gif")); // 9
+			this.em.persist(new Team("Nordirland", "Nordirland.gif")); // 10
+			this.em.persist(new Team("Österreich", "Oesterreich.gif")); // 11
+			this.em.persist(new Team("Polen", "Polen.gif")); // 12
+			this.em.persist(new Team("Portugal", "Portugal.gif")); // 13
+			this.em.persist(new Team("Rumänien", "Rumaenien.gif")); // 14
+			this.em.persist(new Team("Russland", "Russland.gif")); // 15
+			this.em.persist(new Team("Schweden", "Schweden.gif")); // 16
+			this.em.persist(new Team("Schweiz", "Schweiz.gif")); // 17
+			this.em.persist(new Team("Slowakei", "Slowakei.gif")); // 18
+			this.em.persist(new Team("Spanien", "Spanien.gif")); // 19
+			this.em.persist(new Team("Tschechische Republik", "Tschechien.gif")); // 20
+			this.em.persist(new Team("Türkei", "Tuerkei.gif")); // 21
+			this.em.persist(new Team("Ukraine", "Ukraine.gif")); // 22
+			this.em.persist(new Team("Ungarn", "Ungarn.gif")); // 23
+			this.em.persist(new Team("Wales", "Wales.gif")); // 24
 			this.laender = new ListDataModel<Team>();
 			this.laender.setWrappedData(this.em.createNamedQuery(Team.findAll).getResultList());
 			this.utx.commit();
@@ -119,4 +147,22 @@ public class TeamHandler implements Serializable {
 		this.gruppenID = gruppenID;
 	}
 
+	// public StreamedContent getImage() {
+	// FacesContext context = FacesContext.getCurrentInstance();
+	// if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+	// // So, we're rendering the view. Return a stub StreamedContent so that it
+	// will generate right URL.
+	// return new DefaultStreamedContent();
+	// }
+	// else {
+	// // So, browser is requesting the image. Return a real StreamedContent
+	// with the image bytes.
+	// String id =
+	// context.getExternalContext().getRequestParameterMap().get("id");
+	// Image image = this.service.find(Long.valueOf(id));
+	// return new DefaultStreamedContent(new
+	// ByteArrayInputStream(image.getBytes()));
+	// }
+	// }
+	// }
 }
