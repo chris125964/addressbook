@@ -18,6 +18,11 @@
 			<li><h:commandLink value="Übersicht über die Länder"
 					immediate="true" action="anzeige-laender.xhtml?faces-redirect=true" />
 			</li>
+			<li><h:commandLink value="Übersicht über die Matches"
+					immediate="true" action="anzeige-matches.xhtml?faces-redirect=true" />
+			</li>
+			<li><h:commandLink value="Erzeugen der Spiele" immediate="true"
+					action="#{matchHandler.createMatches}" /></li>
 			<li><h:commandLink value="Abmelden" immediate="true"
 					action="#{anwenderHandler.logout}" /></li>
 		</ul>

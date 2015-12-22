@@ -147,22 +147,4 @@ public class TeamHandler implements Serializable {
 		this.gruppenID = gruppenID;
 	}
 
-	// public StreamedContent getImage() {
-	// FacesContext context = FacesContext.getCurrentInstance();
-	// if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-	// // So, we're rendering the view. Return a stub StreamedContent so that it
-	// will generate right URL.
-	// return new DefaultStreamedContent();
-	// }
-	// else {
-	// // So, browser is requesting the image. Return a real StreamedContent
-	// with the image bytes.
-	// String id =
-	// context.getExternalContext().getRequestParameterMap().get("id");
-	// Image image = this.service.find(Long.valueOf(id));
-	// return new DefaultStreamedContent(new
-	// ByteArrayInputStream(image.getBytes()));
-	// }
-	// }
-	// }
 }

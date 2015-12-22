@@ -52,12 +52,12 @@ public class GroupHandler implements Serializable {
 			Team gefundenesLand2 = this.em.find(Team.class, this.getTeamId2());
 			Team gefundenesLand3 = this.em.find(Team.class, this.getTeamId3());
 			Team gefundenesLand4 = this.em.find(Team.class, this.getTeamId4());
-			this.speichereGruppe(this.currentGroup, gefundenesLand1, gefundenesLand2, gefundenesLand3,
-					gefundenesLand4);
+			this.speichereGruppe(this.currentGroup, gefundenesLand1, gefundenesLand2, gefundenesLand3, gefundenesLand4);
 			this.speichereLand(gefundenesLand1);
 			this.speichereLand(gefundenesLand2);
 			this.speichereLand(gefundenesLand3);
 			this.speichereLand(gefundenesLand4);
+
 			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.currentGroup + "' aufgerufen");
 			this.groups.setWrappedData(this.em.createNamedQuery(Gruppe.findAll).getResultList());
 			this.utx.commit();

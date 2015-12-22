@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="layout.xhtml">
+
+	<ui:define name="header">
+		<div id="header">Anzeige aller Matches</div>
+	</ui:define>
+
+	<ui:define name="main">
+		<h:form>
+			<h:dataTable value="#{matchHandler.matches}" var="aktuellesMatch"
+				rowClasses="odd,even" headerClass="header" footerClass="footer">
+				<f:facet name="header">Anzeige aller Matches</f:facet>
+				<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
+				<h:column>
+					<f:facet name="header">Land</f:facet>
+   					#{aktuellesMatch.team1.name}
+   				</h:column>
+				<h:column>
+					<f:facet name="header">Land</f:facet>
+   					#{aktuellesMatch.team2.name}
+   				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{teamHandler.neuanlage}" value="Neuanlage"
+				style="width: 80px; margin: 10px 2px 2px 2px;" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
