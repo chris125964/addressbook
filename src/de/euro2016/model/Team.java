@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.model;
 
 import java.io.Serializable;
 
@@ -8,23 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-@NamedQuery(name = "SelectLaender", query = "Select c From Land  c")
+@NamedQuery(name = Team.select, query = "Select c From Team  c")
 @Entity
-public class Land implements Serializable {
+public class Team implements Serializable {
 
 	private static final long serialVersionUID = -7569584658487581798L;
+
+	public static final String select = "SelectTeams";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String land;
-	private Gruppe gruppe;
-	private Integer nummerInGruppe;
+	private String name;
 
-	public Land() {
+	public Team() {
 	}
 
-	public Land(final String land) {
-		this.land = land;
+	public Team(final String land) {
+		this.name = land;
 	}
 
 	public Integer getId() {
@@ -35,24 +36,16 @@ public class Land implements Serializable {
 		this.id = id;
 	}
 
-	public String getLand() {
-		return this.land;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setLand(final String land) {
-		this.land = land;
-	}
-
-	public void setGruppe(final Gruppe gruppe) {
-		this.gruppe = gruppe;
-	}
-
-	public Gruppe getGruppe() {
-		return this.gruppe;
+	public void setName(final String land) {
+		this.name = land;
 	}
 
 	@Override
 	public String toString() {
-		return "Land(" + this.id + "): " + this.land;
+		return "Land(" + this.id + "): " + this.name;
 	}
 }

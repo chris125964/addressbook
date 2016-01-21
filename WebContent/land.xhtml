@@ -16,22 +16,22 @@
    			<f:facet name="footer">Footer: #{resourceBundle.copyright}</f:facet>
 			<h:outputLabel value="Name:" for="laendername" />
    			<h:panelGroup>
-   				<h:inputText id="vorname" value="#{landHandler.aktuellesLand.land}" required="true" requiredMessage="Bitte eingeben" />
+   				<h:inputText id="vorname" value="#{teamHandler.aktuellesLand.name}" required="true" requiredMessage="Bitte eingeben" />
    				<h:message for="vorname" styleClass="message" />
    			</h:panelGroup>
    			<h:panelGroup>
-				<h:selectOneMenu id="enum2" value="#{landHandler.gruppenID}">
+				<h:selectOneMenu id="enum2" value="#{teamHandler.gruppenID}">
 					<!-- var: damit wird das konkrete Objekt bezeichnet, das aus "value" innerhalb der Schleife gelesen wird
 						itemValue: 
 					 -->
-					<f:selectItems value="#{gruppenHandler.gruppen}"
+					<f:selectItems value="#{groupHandler.groups}"
 							var="selektierteGruppe"
 							itemValue="#{selektierteGruppe.id}"
 							itemLabel="#{selektierteGruppe.kennzeichen}" />
 				</h:selectOneMenu>
 			</h:panelGroup>
    		</h:panelGrid>
-   		<h:commandButton id="speichern" action="#{landHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
+   		<h:commandButton id="speichern" action="#{teamHandler.speichern}" value="Speichern" style="width: 80px; margin: 10px 2px 2px 2px;" />
    	</h:form>
    </body>
    

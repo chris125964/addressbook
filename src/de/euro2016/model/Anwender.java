@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.model;
 
 import java.io.Serializable;
 

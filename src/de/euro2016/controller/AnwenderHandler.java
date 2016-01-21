@@ -1,4 +1,4 @@
-package de.jsfpraxis;
+package de.euro2016.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
+
+import de.euro2016.model.Anwender;
 
 /**
  * Einfache Managed-Bean zur Verwaltung von Anwendern
@@ -145,7 +147,7 @@ public class AnwenderHandler implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		Logger.getAnonymousLogger().log(Level.INFO, "'init()' für Anwender aufgerufen");
+		Logger.getAnonymousLogger().log(Level.INFO, "'AnwenderHandler.init()' für Anwender aufgerufen");
 		try {
 			this.utx.begin();
 			this.em.persist(new Anwender("Angelika"));

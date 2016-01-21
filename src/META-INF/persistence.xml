@@ -6,9 +6,9 @@
 	<persistence-unit name="Adressbuch" transaction-type="JTA">
 		<description>Dieses persistence.xml ist am richtigen Ort</description>
 		<jta-data-source>TutorialJDBCResource</jta-data-source>
-		<class>de.jsfpraxis.Land</class>
-		<class>de.jsfpraxis.Anwender</class>
-		<class>de.jsfpraxis.Gruppe</class>
+		<class>de.euro2016.model.Team</class>
+		<class>de.euro2016.model.Anwender</class>
+		<class>de.euro2016.model.Group</class>
 		<properties>
 			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />

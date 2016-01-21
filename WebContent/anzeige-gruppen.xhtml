@@ -11,7 +11,7 @@
 
 	<ui:define name="main">
 		<h:form>
-			<h:dataTable value="#{gruppenHandler.gruppen}" var="euroGruppe"
+			<h:dataTable value="#{groupHandler.groups}" var="euroGruppe"
 				rowClasses="odd,even" headerClass="header" footerClass="footer">
 				<f:facet name="header">Anzeige aller Gruppen</f:facet>
 				<f:facet name="footer">#{resourceBundle.copyright}</f:facet>
@@ -20,13 +20,13 @@
    					#{euroGruppe.kennzeichen}
    				</h:column>
 				<h:column>
-					<h:commandButton action="#{gruppenHandler.aendern}" value="Ändern" />
+					<h:commandButton action="#{groupHandler.aendern}" value="Ändern" />
 				</h:column>
 				<h:column>
-					<h:commandButton action="#{gruppenHandler.loeschen}" value="Löschen" />
+					<h:commandButton action="#{groupHandler.loeschen}" value="Löschen" />
 				</h:column>
 			</h:dataTable>
-			<h:commandButton action="#{gruppenHandler.neuanlage}" value="Neuanlage"
+			<h:commandButton action="#{groupHandler.neuanlage}" value="Neuanlage"
 				style="width: 80px; margin: 10px 2px 2px 2px;" />
 		</h:form>
 	</ui:define>

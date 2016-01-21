@@ -1,6 +1,5 @@
-package de.jsfpraxis;
+package de.euro2016.controller;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,13 +14,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import de.euro2016.model.Group;
+import de.euro2016.model.Team;
+
 @ManagedBean
 @SessionScoped
-public class GruppenHandler implements Serializable {
+public class GroupHandler {
 
 	private static final long serialVersionUID = -6544110274546711076L;
 
-	private static Logger logger = Logger.getLogger(GruppenHandler.class.getCanonicalName());
+	private static Logger logger = Logger.getLogger(GroupHandler.class.getCanonicalName());
 
 	@PersistenceContext
 	private EntityManager em;
@@ -29,34 +31,33 @@ public class GruppenHandler implements Serializable {
 	@Resource
 	private UserTransaction utx;
 
-	private DataModel<Gruppe> gruppen;
-	private Gruppe aktuelleGruppe = new Gruppe();
-	private List<Land> listLaender;
+	private DataModel<Group> groups;
+	private Group aktuelleGroup = new Group();
+	private List<Team> listLaender;
 	private Integer teamId1;
 	private Integer teamId2;
 	private Integer teamId3;
 	private Integer teamId4;
 
-	public GruppenHandler() {
-		logger.log(Level.INFO, GruppenHandler.class.getName() + "-Instanz erzeugt");
+	public GroupHandler() {
+		logger.log(Level.INFO, GroupHandler.class.getName() + "-Instanz erzeugt");
 	}
 
 	public String speichern() {
-		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuelleGruppe + "' aufgerufen");
+		Logger.getAnonymousLogger().log(Level.INFO, "speichern() [1] mit " + this.aktuelleGroup + "' aufgerufen");
 		try {
 			this.utx.begin();
-			Land gefundenesLand1 = this.em.find(Land.class, this.getTeamId1());
-			Land gefundenesLand2 = this.em.find(Land.class, this.getTeamId2());
-			Land gefundenesLand3 = this.em.find(Land.class, this.getTeamId3());
-			Land gefundenesLand4 = this.em.find(Land.class, this.getTeamId4());
-			this.speichereGruppe(this.aktuelleGruppe, gefundenesLand1, gefundenesLand2, gefundenesLand3,
-					gefundenesLand4);
-			this.speichereLand(gefundenesLand1, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand2, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand3, this.aktuelleGruppe);
-			this.speichereLand(gefundenesLand4, this.aktuelleGruppe);
-			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuelleGruppe + "' aufgerufen");
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			Team gefundenesLand1 = this.em.find(Team.class, this.getTeamId1());
+			Team gefundenesLand2 = this.em.find(Team.class, this.getTeamId2());
+			Team gefundenesLand3 = this.em.find(Team.class, this.getTeamId3());
+			Team gefundenesLand4 = this.em.find(Team.class, this.getTeamId4());
+			this.speichereGroup(this.aktuelleGroup, gefundenesLand1, gefundenesLand2, gefundenesLand3, gefundenesLand4);
+			// this.speichereLand(gefundenesLand1);
+			// this.speichereLand(gefundenesLand2);
+			// this.speichereLand(gefundenesLand3);
+			// this.speichereLand(gefundenesLand4);
+			Logger.getAnonymousLogger().log(Level.INFO, "speichern() [2] mit " + this.aktuelleGroup + "' aufgerufen");
+			this.groups.setWrappedData(this.em.createNamedQuery(Group.select).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'speichern()' nicht geklappt: " + e.getMessage());
@@ -64,42 +65,41 @@ public class GruppenHandler implements Serializable {
 		return "/anzeige-gruppen.xhtml";
 	}
 
-	private void speichereGruppe(final Gruppe pGruppe, final Land pLand1, final Land pLand2, final Land pLand3,
-			final Land pLand4) {
-		Gruppe gruppe = this.em.merge(pGruppe);
-		gruppe.setTeam1(pLand1);
-		gruppe.setTeam2(pLand2);
-		gruppe.setTeam3(pLand3);
-		gruppe.setTeam4(pLand4);
-		this.em.persist(gruppe);
+	private void speichereGroup(final Group pGroup, final Team pLand1, final Team pLand2, final Team pLand3,
+			final Team pLand4) {
+		Group group = this.em.merge(pGroup);
+		group.setTeam1(pLand1);
+		group.setTeam2(pLand2);
+		group.setTeam3(pLand3);
+		group.setTeam4(pLand4);
+		this.em.persist(group);
 	}
 
-	private void speichereLand(final Land pLand, final Gruppe pGruppe) {
-		Land land = this.em.merge(pLand);
-		land.setGruppe(pGruppe);
+	private void speichereLand(final Team pLand) {
+		Team land = this.em.merge(pLand);
 		this.em.persist(land);
 	}
 
 	public String aendern() {
-		this.aktuelleGruppe = this.gruppen.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuelleGruppe);
+		this.aktuelleGroup = this.groups.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "aendern() mit " + this.aktuelleGroup);
 		return "/gruppe.xhtml";
 	}
 
 	public String neuanlage() {
-		this.aktuelleGruppe = new Gruppe();
+		this.aktuelleGroup = new Group();
 		Logger.getAnonymousLogger().log(Level.INFO, "neuanlage()");
 		return "/gruppe.xhtml";
 	}
 
 	public String loeschen() {
-		this.aktuelleGruppe = this.gruppen.getRowData();
-		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuelleGruppe);
+		this.aktuelleGroup = this.groups.getRowData();
+		Logger.getAnonymousLogger().log(Level.INFO, "loeschen() mit " + this.aktuelleGroup);
 		try {
 			this.utx.begin();
-			this.aktuelleGruppe = this.em.merge(this.aktuelleGruppe);
-			this.em.remove(this.aktuelleGruppe);
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.aktuelleGroup = this.em.merge(this.aktuelleGroup);
+			this.em.remove(this.aktuelleGroup);
+			this.groups.setWrappedData(this.em.createNamedQuery("" + Group.select).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'loeschen()' nicht geklappt", e.getMessage());
@@ -109,46 +109,46 @@ public class GruppenHandler implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		Logger.getAnonymousLogger().log(Level.INFO, "'init()' aufgerufen");
+		Logger.getAnonymousLogger().log(Level.INFO, "'GroupHandler.init()' aufgerufen");
 		try {
 			this.utx.begin();
-			this.em.persist(new Gruppe('A'));
-			this.em.persist(new Gruppe('B'));
-			this.em.persist(new Gruppe('C'));
-			this.em.persist(new Gruppe('D'));
-			this.em.persist(new Gruppe('E'));
-			this.em.persist(new Gruppe('F'));
-			this.em.persist(new Gruppe('G'));
-			this.em.persist(new Gruppe('H'));
-			this.gruppen = new ListDataModel<Gruppe>();
-			this.gruppen.setWrappedData(this.em.createNamedQuery("SelectGruppen").getResultList());
+			this.em.persist(new Group('A'));
+			// this.em.persist(new Group('B'));
+			// this.em.persist(new Group('C'));
+			// this.em.persist(new Group('D'));
+			// this.em.persist(new Group('E'));
+			// this.em.persist(new Group('F'));
+			// this.em.persist(new Group('G'));
+			// this.em.persist(new Group('H'));
+			this.groups = new ListDataModel<Group>();
+			this.groups.setWrappedData(this.em.createNamedQuery(Group.select).getResultList());
 			this.utx.commit();
 		} catch (Exception e) {
 			Logger.getAnonymousLogger().log(Level.SEVERE, "'init()' nicht geklappt: " + e.getMessage());
 		}
 	}
 
-	public DataModel<Gruppe> getGruppen() {
-		return this.gruppen;
+	public DataModel<Group> getGroups() {
+		return this.groups;
 	}
 
-	public void setGruppen(final DataModel<Gruppe> gruppen) {
-		this.gruppen = gruppen;
+	public void setGroups(final DataModel<Group> gruppen) {
+		this.groups = gruppen;
 	}
 
-	public Gruppe getAktuelleGruppe() {
-		return this.aktuelleGruppe;
+	public Group getCurrentGroup() {
+		return this.aktuelleGroup;
 	}
 
-	public void setAktuelleGruppe(final Gruppe aktuelleGruppe) {
-		this.aktuelleGruppe = aktuelleGruppe;
+	public void setCurrentGroup(final Group aktuelleGruppe) {
+		this.aktuelleGroup = aktuelleGruppe;
 	}
 
-	public List<Land> getListLaender() {
+	public List<Team> getListLaender() {
 		return this.listLaender;
 	}
 
-	public void setListLaender(final List<Land> listLaender) {
+	public void setListLaender(final List<Team> listLaender) {
 		this.listLaender = listLaender;
 	}
 
