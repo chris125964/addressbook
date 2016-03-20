@@ -5,12 +5,12 @@
 
 	<persistence-unit name="Euro2016" transaction-type="JTA">
 		<description>Dieses persistence.xml ist am richtigen Ort</description>
-		<jta-data-source>jdbc/__euro</jta-data-source>
-		<class>de.euro2016.model.Team</class>
+		<jta-data-source>jdbc/__euro2016</jta-data-source>
 		<class>de.jsfpraxis.Anwender</class>
 		<class>de.euro2016.model.Gruppe</class>
 		<class>de.euro2016.model.User</class>
 		<class>de.euro2016.model.Match</class>
+		<class>de.euro2016.model.Team</class>
 		<properties>
 			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
